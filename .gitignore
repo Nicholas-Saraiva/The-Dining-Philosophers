@@ -1,0 +1,74 @@
+# ------------------------------------
+# C/C++ Compilation Artifacts
+# ------------------------------------
+
+# Object files and dependency files (from GCC/Clang)
+*.o
+*.obj
+*.d
+
+# Executable files
+# Commonly 'a.out' on Linux/macOS, or named after the project.
+a.out
+*.exe
+*.out
+*.bin
+
+# Shared libraries and archives
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Linker/make backup files
+*.bak
+*.old
+*.orig
+*.swp
+
+# ------------------------------------
+# Text/Log Files
+# ------------------------------------
+
+# Exclude all .txt files in the project, as requested
+*.txt
+
+# ------------------------------------
+# Editor/IDE Configuration Files
+# ------------------------------------
+
+# Visual Studio Code (VS Code) - as requested
+.vscode/
+
+# Vim/NeoVim Swap/Backup files
+# Ignore if you use Vim or an editor based on it
+*.swo
+*.swn
+*.swo
+*.swp
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# JetBrains/CLion IDE files (IntelliJ, etc.)
+.idea/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/
+
+# ------------------------------------
+# OS Generated Files
+# ------------------------------------
+
+# macOS
+.DS_Store
+
+# Windows Thumbnail Cache
+Thumbs.db
