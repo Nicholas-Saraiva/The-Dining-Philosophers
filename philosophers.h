@@ -9,13 +9,15 @@
 #include <threads.h>
 #include <unistd.h>
 
-typedef stuct s_philo
+#define NUMBER_OF_ARGS 5
+
+typedef struct s_philo
 {
 	int	meal_count;
 	int	last_time_meal;
 	int	*l_fork;
 	int	*r_fork;
-}	t_philo
+}	t_philo;
 
 typedef struct s_table
 {
