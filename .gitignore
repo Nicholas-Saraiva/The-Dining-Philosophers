@@ -2,6 +2,9 @@
 # C/C++ Compilation Artifacts
 # ------------------------------------
 
+#executable
+philosophers
+
 # Object files and dependency files (from GCC/Clang)
 *.o
 *.obj
