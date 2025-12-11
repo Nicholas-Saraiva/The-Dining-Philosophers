@@ -29,4 +29,8 @@ typedef struct s_table
 	int		*forks;
 	t_philo	*philos;
 }	t_table;
+
+//=-=-=-= errors.c =-=-=-=
+void	error_message(char *str);
+
 #endif

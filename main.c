@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 19:11:58 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/11 20:12:01 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/11 20:32:00 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,21 @@ int	main(int argc, char *argv[])
 
 	if (!(argc == NUMBER_OF_ARGS || argc == NUMBER_OF_ARGS + 1))
 	{
-		write (2, "Error: Wrong number of args\n", 29);
+		error_message("Error: Wrong number of args.");
 		return (1);
 	}
 	(void)argv;
 	i = -1;
 	if (mtx_init(&serial_mtx, mtx_plain) != thrd_success)
 	{
-		write(2, "Fatal error: Could not initialize\
-			   	mutex.\n", 41);
+		error_message("Fatal error: Could not initialize mutex.");
 		return (1);
 	}
 	while (++i < THREAD_COUNT)
 	{
 		if (thrd_create(t + i, run, NULL) != thrd_success)
 		{
-			write(2, "Error: Coul not initialize thrd\n", 31);
+			error_message("Error: Coul not initialize thrd.");
 			break;
 		}
 	}

@@ -1,9 +1,9 @@
-CC=cc
-CC_FLAGS=-Wall -Wextra -Werror -g
+CC = cc
+CC_FLAGS = -Wall -Wextra -Werror -g
 OBJDIR = objs
-NAME=philosophers
+NAME = philosophers
 
-SRCS=main.c
+SRCS = main.c errors.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 all:$(NAME)
