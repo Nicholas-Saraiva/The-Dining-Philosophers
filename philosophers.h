@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/12 19:40:24 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:53:32 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_table
 	int		time_to_die;
 	int		time_to_sleep;
 	int		n_seats;
-	int		*forks;
+	mtx_t	*forks;
 	t_philo	*philos;
 }	t_table;
 
