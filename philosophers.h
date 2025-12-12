@@ -1,15 +1,27 @@
-# ifndef PHILOSOPHERS_H
-#define PHILOSOPHERS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
+/*   Updated: 2025/12/12 19:40:24 by nsaraiva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifdef __STDC_NO_THREADS__
-#error Please give back my THREADS sob sob ;-;
-#endif
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-#include <stdio.h>
-#include <threads.h>
-#include <unistd.h>
+# ifdef __STDC_NO_THREADS__
+#  error Please give back my THREADS sob sob ;-;
+# endif
 
-#define NUMBER_OF_ARGS 5
+# include <stdio.h>
+# include <threads.h>
+# include <unistd.h>
+
+# define NUMBER_OF_ARGS 5
 
 typedef struct s_philo
 {
@@ -32,5 +44,10 @@ typedef struct s_table
 
 //=-=-=-= errors.c =-=-=-=
 void	error_message(char *str);
+
+//=-=-=-= utils.c =-=-=-=
+int		is_numeric(char *str);
+int		ft_atoi(const char *nptr);
+int		ft_isspace(char c);
 
 #endif

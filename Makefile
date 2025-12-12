@@ -3,7 +3,7 @@ CC_FLAGS = -Wall -Wextra -Werror -g
 OBJDIR = objs
 NAME = philosophers
 
-SRCS = main.c errors.c
+SRCS = main.c errors.c utils.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 all:$(NAME)
