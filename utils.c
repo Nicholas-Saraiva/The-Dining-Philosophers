@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:33:20 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/12 19:40:11 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:11:58 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,16 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	}
 	return (sign * value);
+}
+
+void	destroy_mutex(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->n_seats)
+	{
+		mtx_destroy(&table->forks[i]);
+		i++;
+	}
 }

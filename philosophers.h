@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/12 19:53:32 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:44:23 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@
 # include <stdio.h>
 # include <threads.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 # define NUMBER_OF_ARGS 5
 
 typedef struct s_philo
 {
-	int	meal_count;
-	int	last_time_meal;
-	int	*l_fork;
-	int	*r_fork;
+	thrd_t	thread;
+	int		*l_fork;
+	int		*r_fork;
+	int		meal_count;
+	int		last_time_meal;
 }	t_philo;
 
 typedef struct s_table
@@ -49,5 +51,6 @@ void	error_message(char *str);
 int		is_numeric(char *str);
 int		ft_atoi(const char *nptr);
 int		ft_isspace(char c);
+void	destroy_mutex(t_table *table);
 
 #endif
