@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 20:27:07 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/13 15:04:35 by nsaraiva         ###   ########.fr       */
+/*   Created: 2025/12/13 14:39:26 by nsaraiva          #+#    #+#             */
+/*   Updated: 2025/12/13 15:59:18 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	error_message(char *str)
+long long	get_current_time_ms(void)
 {
-	int	i;
+	struct timeval	tv;
 
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-		i++;
-	write (2, str, i);
-	write (2, "\n", 1);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+long long	get_elapsed_time(t_table *table)
+{
+	return (get_current_time_ms() - table->start_time);
 }

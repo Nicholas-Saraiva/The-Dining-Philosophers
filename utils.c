@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:33:20 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/12 21:36:53 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/14 19:09:49 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ int	ft_atoi(const char *nptr)
 	return (sign * value);
 }
 
-void	destroy_forks(t_table *table)
+void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
 {
 	int	i;
 
 	i = 0;
-	if (!table->forks)
+	if (!table->forks || (*mutex))
 		return ;
 	while (i < table->n_seats)
 	{
-		mtx_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&(*mutex)[i]);
 		i++;
 	}
-	free(table->forks);
-	table->forks = NULL;
+	free((*mutex));
+	(*mutex) = NULL;
 }
