@@ -49,6 +49,7 @@ int	fill_table(t_table *table, char *argv[])
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
+	table->drinked_hemlock = 0;
 	table->meal_max = ft_atoi(argv[5]);
 	if (!initialize_mutex(table))
 		return (0);
@@ -92,7 +93,6 @@ static int	make_plato(t_philo **philos, t_table *table)
 		(*philos)[i].l_fork = &table->forks[i];
 		(*philos)[i].r_fork = &table->forks[(i + 1) % table->n_seats];
 		(*philos)[i].id = i;
-		(*philos)[i].is_dead = 0;
 		pthread_create(&(*philos)[i].thread, NULL, symposium, &(*philos)[i]);
 	}
 	return (1);

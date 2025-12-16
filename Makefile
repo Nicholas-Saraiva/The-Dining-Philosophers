@@ -1,5 +1,5 @@
 CC = cc
-CC_FLAGS = -Wall -Wextra -Werror -g
+CC_FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJDIR = objs
 NAME = philosophers
 
@@ -20,7 +20,6 @@ clean:
 	rm -rf $(OBJDIR)
 fclean: clean
 	rm -rf $(NAME)
-re: fclean
-	all
+re: fclean all
 
 .PHONY: clean all

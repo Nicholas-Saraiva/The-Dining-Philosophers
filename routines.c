@@ -49,11 +49,11 @@ void	*symposium(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *) arg;
-	while (!philo->is_dead)
+	while (!philo->table->drinked_hemlock)
 	{
 		take_forks(philo);
 		pthread_mutex_lock(&philo->lock_seat);
-		if (!philo->is_dead)
+		if (!philo->table->drinked_hemlock)
 		{
 			safe_print_thread(philo, "is eating\n");
 			usleep(philo->table->time_to_eat * 1000);
@@ -61,7 +61,7 @@ void	*symposium(void *arg)
 		}
 		pthread_mutex_unlock(&philo->lock_seat);
 		drop_forks(philo);
-		if (!philo->is_dead)
+		if (!philo->table->drinked_hemlock)
 		{
 			safe_print_thread(philo, "is sleeping\n");
 			usleep(philo->table->time_to_sleep);
@@ -75,29 +75,30 @@ void	*meal_routine(void *arg)
 {
 	t_table		*table;
 	long long	time_since_last_meal;
-	int			n_death;
 	int			i;
 
-	n_death = 0;
 	table = (t_table *)arg;
-	while (n_death != table->n_seats)
+	while (!table->drinked_hemlock)
 	{
 		i = -1;
 		while (++i < table->n_seats)
 		{
-			if (table->philos[i].is_dead)
-				continue ;
 			time_since_last_meal = get_elapsed_time(table) - \
 			table->philos[i].last_time_meal;
 			pthread_mutex_lock(&table->philos[i].lock_seat);
 			if (time_since_last_meal > table->time_to_die)
 			{
-				safe_print_thread(&table->philos[i], "died\n");
-				table->philos[i].is_dead = 1;
-				n_death++;
+				pthread_mutex_lock(&table->print);
+				printf ("%lld %d died\n", \
+				get_elapsed_time(table), table->philos->id);	
+				table->drinked_hemlock = 1;
+				pthread_mutex_unlock(&table->print);
+				pthread_mutex_unlock(&table->philos[i].lock_seat);
+				break;
 			}
 			pthread_mutex_unlock(&table->philos[i].lock_seat);
 		}
 	}
+
 	return (0);
 }
