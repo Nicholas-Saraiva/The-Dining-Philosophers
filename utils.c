@@ -73,3 +73,11 @@ void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
 	free((*mutex));
 	(*mutex) = NULL;
 }
+
+void	safe_print_thread(t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->table->print);
+	printf ("%lld %d %s", \
+	get_elapsed_time(philo->table), philo->id, str);	
+	pthread_mutex_unlock(&philo->table->print);
+}

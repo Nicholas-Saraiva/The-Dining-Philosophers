@@ -17,20 +17,16 @@ void	take_forks(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		if (pthread_mutex_lock(philo->l_fork) == 0)
-			printf ("%llu %d has taken a fork\n", \
-				get_elapsed_time(philo->table), philo->id);
+			safe_print_thread (philo, "has taken a fork\n");
 		if (pthread_mutex_lock(philo->r_fork) == 0)
-			printf ("%llu %d has taken a fork\n", \
-				get_elapsed_time(philo->table), philo->id);
+			safe_print_thread (philo, "has taken a fork\n");
 	}
 	else
 	{
 		if (pthread_mutex_lock(philo->r_fork) == 0)
-			printf ("%llu %d has taken a fork\n", \
-				get_elapsed_time(philo->table), philo->id);
+			safe_print_thread (philo, "has taken a fork\n");
 		if (pthread_mutex_lock(philo->l_fork) == 0)
-			printf ("%llu %d has taken a fork\n", \
-				get_elapsed_time(philo->table), philo->id);
+			safe_print_thread (philo, "has taken a fork\n");
 	}
 }
 
@@ -59,8 +55,7 @@ void	*symposium(void *arg)
 		pthread_mutex_lock(&philo->lock_seat);
 		if (!philo->is_dead)
 		{
-			printf ("%lld %d is eating\n", \
-			get_elapsed_time(philo->table), philo->id);
+			safe_print_thread(philo, "is eating\n");
 			usleep(philo->table->time_to_eat * 1000);
 			philo->last_time_meal = get_current_time_ms();
 		}
@@ -68,11 +63,9 @@ void	*symposium(void *arg)
 		drop_forks(philo);
 		if (!philo->is_dead)
 		{
-			printf ("%lld %d is sleeping\n", \
-			get_elapsed_time(philo->table), philo->id);
+			safe_print_thread(philo, "is sleeping\n");
 			usleep(philo->table->time_to_sleep);
-			printf ("%lld %d is thinking\n", \
-			get_elapsed_time(philo->table), philo->id);
+			safe_print_thread(philo, "is thinking\n");
 		}
 	}
 	return (0);
@@ -96,13 +89,14 @@ void	*meal_routine(void *arg)
 				continue ;
 			time_since_last_meal = get_elapsed_time(table) - \
 			table->philos[i].last_time_meal;
+			pthread_mutex_lock(&table->philos[i].lock_seat);
 			if (time_since_last_meal > table->time_to_die)
 			{
-				printf ("%lld %d died\n", get_elapsed_time(table), \
-				table->philos[i].id);
+				safe_print_thread(&table->philos[i], "died\n");
 				table->philos[i].is_dead = 1;
 				n_death++;
 			}
+			pthread_mutex_unlock(&table->philos[i].lock_seat);
 		}
 	}
 	return (0);

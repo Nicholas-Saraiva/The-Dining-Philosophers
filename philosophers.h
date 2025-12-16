@@ -35,6 +35,7 @@ typedef struct s_table
 	int					time_to_sleep;
 	int					n_seats;
 	long long			start_time;
+	pthread_mutex_t		print;
 	pthread_mutex_t		*forks;
 	t_philo				*philos;
 	pthread_t			thread_meal;
@@ -61,6 +62,7 @@ int			is_numeric(char *str);
 int			ft_atoi(const char *nptr);
 int			ft_isspace(char c);
 void		destroy_forks(pthread_mutex_t **mutex, t_table *table);
+void		safe_print_thread(t_philo *philo, char *str);
 
 //=-=-=-= time.c =-=-=-=
 long long	get_current_time_ms(void);

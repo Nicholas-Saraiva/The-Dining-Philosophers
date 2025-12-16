@@ -67,6 +67,9 @@ static int	initialize_mutex(t_table *table)
 		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
 			return (error_message("Fatal error: Could not initialize mutex.") \
 			, destroy_forks(&table->forks, table), 0);
+	if (pthread_mutex_init(&table->print, NULL) != 0)
+		return (error_message("Fatal error: Could not initialize mutex.") \
+	, destroy_forks(&table->forks, table), 0);
 	return (1);
 }
 
