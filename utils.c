@@ -63,7 +63,7 @@ void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
 	int	i;
 
 	i = 0;
-	if (!table->forks || (*mutex))
+	if (!table->forks || !(*mutex))
 		return ;
 	while (i < table->n_seats)
 	{

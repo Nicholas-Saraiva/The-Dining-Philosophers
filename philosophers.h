@@ -67,9 +67,12 @@ void		safe_print_thread(t_philo *philo, char *str);
 //=-=-=-= time.c =-=-=-=
 long long	get_current_time_ms(void);
 long long	get_elapsed_time(t_table *table);
+void		take_forks(t_philo *philo);
+void		drop_forks(t_philo *philo);
 
 //=-=-=-= philosophers.c =-=-=-=
 void		*symposium(void *arg);
 void		*meal_routine(void *arg);
+void		*only_one(void *arg);
 
 #endif

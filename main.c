@@ -29,12 +29,14 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (!make_plato(&table.philos, &table))
 		return (1);
-	pthread_create(&table.thread_meal, NULL, meal_routine, &table);
-	pthread_join(table.thread_meal, NULL);
+	if (table.n_seats > 1)
+	{
+		pthread_create(&table.thread_meal, NULL, meal_routine, &table);
+		pthread_join(table.thread_meal, NULL);
+	}
 	while (++i < table.n_seats)
 		pthread_join(table.philos[i].thread, NULL);
-	destroy_forks(&table.forks, &table);
-	return (0);
+	return (free_all(&table.philos, &table), 0);
 }
 
 int	fill_table(t_table *table, char *argv[])
@@ -89,11 +91,16 @@ static int	make_plato(t_philo **philos, t_table *table)
 		if (pthread_mutex_init(&(*philos)[i].lock_seat, NULL) != 0)
 			return (error_message("Fatal error: Could not initialize mutex."), \
 			free_all(philos, table), 0);
+		(*philos)[i].meal_count = 0;
 		(*philos)[i].table = table;
 		(*philos)[i].l_fork = &table->forks[i];
 		(*philos)[i].r_fork = &table->forks[(i + 1) % table->n_seats];
-		(*philos)[i].id = i;
-		pthread_create(&(*philos)[i].thread, NULL, symposium, &(*philos)[i]);
+		(*philos)[i].id = i + 1;
+		if (table->n_seats > 1)
+			pthread_create(&(*philos)[i].thread, NULL, symposium, &(*philos)[i]);
+		else
+			pthread_create(&(*philos)[i].thread, NULL, only_one, &(*philos)[i]);
+
 	}
 	return (1);
 }
