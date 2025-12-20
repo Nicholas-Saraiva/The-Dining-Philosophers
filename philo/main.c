@@ -43,7 +43,7 @@ int	fill_table(t_table *table, char *argv[])
 {
 	table->start_time = get_current_time_ms();
 	if (!is_numeric(argv[1]) || !is_numeric(argv[2]) || \
-	!is_numeric(argv[3]) || !is_numeric(argv[4]))
+!is_numeric(argv[3]) || !is_numeric(argv[4]))
 		return (error_message("Wrong input. Please put all in numeric."), 0);
 	if (argv[5] && !is_numeric(argv[5]))
 		return (error_message("Wrong input. Please put all in numeric."), 0);
@@ -68,11 +68,11 @@ static int	initialize_mutex(t_table *table)
 		return (error_message("Fatal error: Failed malloc."), 0);
 	while (++i < table->n_seats)
 		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
-			return (error_message("Fatal error: Could not initialize mutex.") \
-			, destroy_forks(&table->forks, table), 0);
+			return (error_message("Fatal error: Could not initialize mutex."), \
+destroy_forks(&table->forks, table), 0);
 	if (pthread_mutex_init(&table->print, NULL) != 0)
-		return (error_message("Fatal error: Could not initialize mutex.") \
-	, destroy_forks(&table->forks, table), 0);
+		return (error_message("Fatal error: Could not initialize mutex."), \
+destroy_forks(&table->forks, table), 0);
 	return (1);
 }
 
@@ -84,23 +84,23 @@ static int	make_plato(t_philo **philos, t_table *table)
 	*philos = malloc(table->n_seats * sizeof(t_philo));
 	if (!philos)
 		return (error_message("Fatal error: Failed malloc."), \
-		free_all(philos, table), 0);
+free_all(philos, table), 0);
 	while (++i < table->n_seats)
 	{
 		memset(&(*philos)[i], 0, sizeof(t_philo));
 		if (pthread_mutex_init(&(*philos)[i].lock_seat, NULL) != 0)
 			return (error_message("Fatal error: Could not initialize mutex."), \
-			free_all(philos, table), 0);
+free_all(philos, table), 0);
 		(*philos)[i].meal_count = 0;
 		(*philos)[i].table = table;
 		(*philos)[i].l_fork = &table->forks[i];
 		(*philos)[i].r_fork = &table->forks[(i + 1) % table->n_seats];
 		(*philos)[i].id = i + 1;
 		if (table->n_seats > 1)
-			pthread_create(&(*philos)[i].thread, NULL, symposium, &(*philos)[i]);
+			pthread_create(&(*philos)[i].thread, NULL, \
+symposium, &(*philos)[i]);
 		else
 			pthread_create(&(*philos)[i].thread, NULL, only_one, &(*philos)[i]);
-
 	}
 	return (1);
 }

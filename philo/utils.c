@@ -83,6 +83,6 @@ void	safe_print_thread(t_philo *philo, char *str)
 		return ;
 	}
 	printf ("%lld %d %s", \
-	get_elapsed_time(philo->table), philo->id, str);	
+get_elapsed_time(philo->table), philo->id, str);
 	pthread_mutex_unlock(&philo->table->print);
 }

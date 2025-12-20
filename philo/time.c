@@ -25,7 +25,6 @@ long long	get_elapsed_time(t_table *table)
 	return (get_current_time_ms() - table->start_time);
 }
 
-
 void	take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
