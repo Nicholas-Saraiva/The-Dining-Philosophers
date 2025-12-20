@@ -1,7 +1,7 @@
 CC = cc
 CC_FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJDIR = objs
-NAME = philosophers
+NAME = philo
 
 SRCS = main.c errors.c utils.c time.c routines.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
