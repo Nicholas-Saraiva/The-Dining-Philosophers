@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/14 19:09:55 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/12/24 18:26:13 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,8 @@ void		drop_forks(t_philo *philo);
 void		*symposium(void *arg);
 void		*meal_routine(void *arg);
 void		*only_one(void *arg);
+
+//=-=-=-= race_utils.c =-=-=-=
+int			check_death(t_philo *philo);
 
 #endif
