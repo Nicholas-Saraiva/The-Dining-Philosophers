@@ -51,6 +51,9 @@ int	fill_table(t_table *table, char *argv[])
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
+	if (table->n_seats == -1 || table->time_to_die == -1 || table->time_to_eat == -1 \
+|| table->time_to_sleep == -1)
+		return (error_message("Wrong input. Please put numbers less than INT_MAX."), 0);
 	table->drinked_hemlock = 0;
 	table->meal_max = ft_atoi(argv[5]);
 	if (!initialize_mutex(table))

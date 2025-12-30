@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <limits.h>
 # define NUMBER_OF_ARGS 5
 
 typedef struct s_philo	t_philo;

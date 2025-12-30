@@ -98,7 +98,7 @@ void	*only_one(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *) arg;
-	printf ("%lld %d  is thinking\n", \
+	printf ("%lld %d  has taken a fork\n", \
 get_elapsed_time(philo->table), philo[0].id);
 	usleep(philo->table->time_to_die * 1000);
 	printf ("%lld %d  died\n", \

@@ -1,5 +1,5 @@
 CC = cc
-CC_FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CC_FLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 OBJDIR = objs
 NAME = philo
 

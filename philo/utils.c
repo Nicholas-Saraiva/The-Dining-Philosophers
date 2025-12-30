@@ -32,30 +32,21 @@ int	ft_isspace(char c)
 
 int	ft_atoi(const char *nptr)
 {
-	int	sign;
-	int	value;
+	unsigned int	value;
 
 	if (!nptr)
 		return (0);
-	sign = 1;
 	value = 0;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr == '-')
-	{
-		sign = -1;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
 	while (*nptr)
 	{
 		if (*nptr < '0' || *nptr > '9')
-			return (sign * value);
+			return (value);
 		value = (value * 10) + (*nptr - '0');
+		if (value > INT_MAX)
+			return (-1);
 		nptr++;
 	}
-	return (sign * value);
+	return (value);
 }
 
 void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
