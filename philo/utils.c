@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:33:20 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/22 19:50:46 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/01 21:10:41 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,6 @@ int	is_numeric(char *str)
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
 	return (1);
-}
-
-int	ft_isspace(char c)
-{
-	if (c == ' ' || (c >= '\t' && c <= '\r'))
-		return (1);
-	return (0);
-}
-
-int	ft_atoi(const char *nptr)
-{
-	unsigned int	value;
-
-	if (!nptr)
-		return (0);
-	value = 0;
-	while (*nptr)
-	{
-		if (*nptr < '0' || *nptr > '9')
-			return (value);
-		value = (value * 10) + (*nptr - '0');
-		if (value > INT_MAX)
-			return (-1);
-		nptr++;
-	}
-	return (value);
 }
 
 void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
@@ -76,4 +50,46 @@ void	safe_print_thread(t_philo *philo, char *str)
 	printf ("%lld %d %s", \
 get_elapsed_time(philo->table), philo->id, str);
 	pthread_mutex_unlock(&philo->table->print);
+}
+
+int	init_plato(t_philo *philos, t_table *table, int i)
+{
+	memset(philos, 0, sizeof(t_philo));
+	if (pthread_mutex_init(&philos->lock_seat, NULL) != 0)
+	{
+		error_message("Fatal error: Could not initialize mutex.");
+		free_all(&philos, table);
+		return (0);
+	}
+	philos->meal_count = 0;
+	philos->table = table;
+	philos->l_fork = &table->forks[i];
+	philos->r_fork = &table->forks[(i + 1) % table->n_seats];
+	philos->id = i + 1;
+	if (table->n_seats > 1)
+	{
+		if (pthread_create(&philos->thread, NULL, \
+symposium, philos) != 0)
+			return (fail_thread_create(philos));
+	}
+	else
+		if (pthread_create(&philos->thread, NULL, only_one, philos) != 0)
+			return (fail_thread_create(philos));
+	return (0);
+}
+
+int	creating_table_routine(t_table *table)
+{
+	if (table->n_seats > 1)
+	{
+		if (pthread_create(&table->thread_meal, NULL, meal_routine, table) \
+		!= 0)
+		{
+			fail_thread_create(table->philos);
+			free_all(&table->philos, table);
+			return (1);
+		}
+		pthread_join(table->thread_meal, NULL);
+	}
+	return (0);
 }

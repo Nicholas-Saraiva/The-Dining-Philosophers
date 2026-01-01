@@ -3,7 +3,7 @@ CC_FLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 OBJDIR = objs
 NAME = philo
 
-SRCS = main.c errors.c utils.c time.c routines.c race_utils.c
+SRCS = main.c errors.c utils.c time.c routines.c race_utils.c ft_atoi.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 all:$(NAME)

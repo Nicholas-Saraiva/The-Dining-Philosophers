@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   race_utils.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/22 19:44:24 by nsaraiva          #+#    #+#             */
-/*   Updated: 2026/01/01 20:43:59 by nsaraiva         ###   ########.fr       */
+/*   Created: 2026/01/01 20:45:55 by nsaraiva          #+#    #+#             */
+/*   Updated: 2026/01/01 20:46:08 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	check_death(t_philo *philo)
+int	ft_atoi(const char *nptr)
 {
-	int	poison;
+	unsigned int	value;
 
-	pthread_mutex_lock(&philo->table->print);
-	poison = philo->table->drinked_hemlock;
-	pthread_mutex_unlock(&philo->table->print);
-	return (poison);
+	if (!nptr)
+		return (0);
+	value = 0;
+	while (*nptr)
+	{
+		if (*nptr < '0' || *nptr > '9')
+			return (value);
+		value = (value * 10) + (*nptr - '0');
+		if (value > INT_MAX)
+			return (-1);
+		nptr++;
+	}
+	return (value);
 }

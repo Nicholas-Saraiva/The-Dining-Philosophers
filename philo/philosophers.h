@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/12/24 18:26:13 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/01 21:02:14 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ typedef struct s_philo
 }	t_philo;
 
 //=-=-=-= errors.c =-=-=-=
+void		free_all(t_philo **philos, t_table *table);
 void		error_message(char *str);
+int			fail_thread_create(t_philo *philo);
 
 //=-=-=-= utils.c =-=-=-=
+int			init_plato(t_philo *philos, t_table *table, int i);
+int			creating_table_routine(t_table *table);
 int			is_numeric(char *str);
-int			ft_atoi(const char *nptr);
-int			ft_isspace(char c);
 void		destroy_forks(pthread_mutex_t **mutex, t_table *table);
 void		safe_print_thread(t_philo *philo, char *str);
 
@@ -78,5 +80,8 @@ void		*only_one(void *arg);
 
 //=-=-=-= race_utils.c =-=-=-=
 int			check_death(t_philo *philo);
+
+//=-=-=-= ft_atoi.c =-=-=-=
+int			ft_atoi(const char *nptr);
 
 #endif
