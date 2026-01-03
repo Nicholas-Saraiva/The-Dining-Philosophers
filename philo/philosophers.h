@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:44:01 by nsaraiva          #+#    #+#             */
-/*   Updated: 2026/01/01 21:02:14 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:30:57 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_philo
 //=-=-=-= errors.c =-=-=-=
 void		free_all(t_philo **philos, t_table *table);
 void		error_message(char *str);
-int			fail_thread_create(t_philo *philo);
+int			fail_thread_create(t_table *table, int fail_position);
 
 //=-=-=-= utils.c =-=-=-=
 int			init_plato(t_philo *philos, t_table *table, int i);

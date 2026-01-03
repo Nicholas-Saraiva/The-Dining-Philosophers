@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 19:11:58 by nsaraiva          #+#    #+#             */
-/*   Updated: 2026/01/01 21:12:23 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:38:57 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	fill_table(t_table *table, char *argv[])
 		return (0);
 	}
 	table->n_seats = ft_atoi(argv[1]);
+	if (table->n_seats > 200)
+		return (0);
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);

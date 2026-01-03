@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:33:20 by nsaraiva          #+#    #+#             */
-/*   Updated: 2026/01/01 21:10:41 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:31:18 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int	init_plato(t_philo *philos, t_table *table, int i)
 	{
 		if (pthread_create(&philos->thread, NULL, \
 symposium, philos) != 0)
-			return (fail_thread_create(philos));
+			return (fail_thread_create(table, i));
 	}
 	else
 		if (pthread_create(&philos->thread, NULL, only_one, philos) != 0)
-			return (fail_thread_create(philos));
+			return (fail_thread_create(table, i));
 	return (0);
 }
 
@@ -85,7 +85,7 @@ int	creating_table_routine(t_table *table)
 		if (pthread_create(&table->thread_meal, NULL, meal_routine, table) \
 		!= 0)
 		{
-			fail_thread_create(table->philos);
+			fail_thread_create(table, table->n_seats);
 			free_all(&table->philos, table);
 			return (1);
 		}

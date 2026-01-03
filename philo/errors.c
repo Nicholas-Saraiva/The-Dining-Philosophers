@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:27:07 by nsaraiva          #+#    #+#             */
-/*   Updated: 2026/01/01 21:03:17 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:30:51 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ void	error_message(char *str)
 	write (2, "\n", 1);
 }
 
-int	fail_thread_create(t_philo *philo)
+int	fail_thread_create(t_table *table, int fail_position)
 {
-	pthread_mutex_lock(&philo->table->print);
-	philo->table->drinked_hemlock = 1;
+	int	i;
+
+	i = -1;
+	pthread_mutex_lock(&table->print);
+	table->drinked_hemlock = 1;
 	error_message("FAIL THREAD CREATION");
-	pthread_mutex_unlock(&philo->table->print);
+	pthread_mutex_unlock(&table->print);
+	while (++i < fail_position)
+		pthread_join(table->philos[i].thread, NULL);
 	return (1);
 }
 
