@@ -35,6 +35,7 @@ void	destroy_forks(pthread_mutex_t **mutex, t_table *table)
 		pthread_mutex_destroy(&(*mutex)[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&table->print);
 	free((*mutex));
 	(*mutex) = NULL;
 }
@@ -83,7 +84,7 @@ int	creating_table_routine(t_table *table)
 	if (table->n_seats > 1)
 	{
 		if (pthread_create(&table->thread_meal, NULL, meal_routine, table) \
-		!= 0)
+!= 0)
 		{
 			fail_thread_create(table, table->n_seats);
 			free_all(&table->philos, table);

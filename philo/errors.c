@@ -46,7 +46,7 @@ void	free_all(t_philo **philos, t_table *table)
 	i = -1;
 	if ((*philos))
 		while (++i < table->n_seats)
-			pthread_mutex_destroy(&(*philos)->lock_seat);
+			pthread_mutex_destroy(&(*philos)[i].lock_seat);
 	if ((*philos))
 		free((*philos));
 	(*philos) = NULL;

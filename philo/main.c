@@ -27,7 +27,9 @@ int	main(int argc, char *argv[])
 		error_message("Error: Wrong number of args.");
 		return (1);
 	}
-	if (!fill_table(&table, argv) || make_plato(&table.philos, &table))
+	if (!fill_table(&table, argv))
+		return (1);
+	if (make_plato(&table.philos, &table))
 	{
 		free_all(&table.philos, &table);
 		return (1);
@@ -44,7 +46,7 @@ int	fill_table(t_table *table, char *argv[])
 {
 	table->start_time = get_current_time_ms();
 	if (!is_numeric(argv[1]) || !is_numeric(argv[2]) || !is_numeric(argv[3]) \
-	|| !is_numeric(argv[4]) || (argv[5] && !is_numeric(argv[5])))
+|| !is_numeric(argv[4]) || (argv[5] && !is_numeric(argv[5])))
 	{
 		error_message("Wrong input. Please put all in numeric.");
 		return (0);
@@ -103,7 +105,6 @@ static int	make_plato(t_philo **philos, t_table *table)
 	if (!(*philos))
 	{
 		error_message("Fatal error: Failed malloc.");
-		free_all(philos, table);
 		return (1);
 	}
 	while (++i < table->n_seats)
